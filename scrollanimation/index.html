@@ -1,11 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GSAP ScrollTrigger Learning</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      border-bottom: 1px solid #333;
+    }
+
+    .hero {
+      background: #1e1e1e;
+    }
+
+    .box-section {
+      background: #222;
+    }
+
+    .box {
+      width: 150px;
+      height: 150px;
+      background: crimson;
+      border-radius: 20px;
+    }
+
+    .text-section {
+      background: #333;
+    }
+
+    h1 {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+  </style>
 </head>
 <body>
-    
+
+  <section class="hero">
+    <h2>Scroll Down 👇</h2>
+  </section>
+
+  <section class="box-section">
+    <div class="box"></div>
+  </section>
+
+  <section class="text-section">
+    <h1>GSAP ScrollTrigger</h1>
+  </section>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- ScrollTrigger Plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    // Register plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Box animation
+    gsap.from(".box", {
+      x: -300,
+      opacity: 0,
+      duration: 1.5,
+      rotate: 360,
+
+      scrollTrigger: {
+        trigger: ".box",
+        start: "top 80%",
+        end: "top 30%",
+        scrub: 1,
+        markers: true
+      }
+    });
+
+    // Text animation
+    gsap.to("h1", {
+      opacity: 1,
+      y: 0,
+      duration: 1.5,
+
+      scrollTrigger: {
+        trigger: "h1",
+        start: "top 75%",
+        toggleActions: "play none none reverse",
+        markers: true
+      }
+    });
+  </script>
+
 </body>
 </html>
