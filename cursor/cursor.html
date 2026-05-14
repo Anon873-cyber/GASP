@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .overlay {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            z-index: 10;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main {
+            height: 100vh;
+            width: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #image {
+            height: 50vh;
+            width: 40vw;
+            background-color: red;
+            position: relative;
+
+        }
+
+        #image img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        #cursor {
+            height: 20px;
+            width: 20px;
+            background-color: white;
+            border-radius: 50%;
+            z-index: 9;
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cursor">
+
+    </div>
+    <div id="main">
+        <div id="image">
+            <div class="overlay"></div>
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGFyaXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                alt="" srcset="">
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+    var image = document.querySelector("#image");
+    var main = document.querySelector("#main");
+    var cursor = document.querySelector("#cursor");
+
+    main.addEventListener("mousemove", (mouse) => {
+        gsap.to(cursor, {
+            duration: 0.1,
+            x: mouse.x,
+            y: mouse.y,
+            ease: "power2.out"
+        });
+
+        console.log(cursor)
+    })
+
+
+    image.addEventListener("mouseenter", () => {
+        gsap.to(cursor, {
+            duration: 0.3,
+            scale: 2,
+            backgroundColor: "transparent",
+            border: "2px solid white",
+            ease: "power2.out"
+        });
+    })
+
+    image.addEventListener("mouseleave", () => {
+        gsap.to(cursor, {
+            duration: 0.3,
+            scale: 1,
+            backgroundColor: "white",
+            border: "none",
+            ease: "power2.out"
+        });
+    })
+
+</script>
+
+</html>
