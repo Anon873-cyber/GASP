@@ -120,6 +120,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const navClose = document.querySelector('.nav-close');
         var tl = gsap.timeline();
         tl.to("nav", {
             left: 0,
@@ -141,7 +143,13 @@
             duration: 0.3,
             ease: "power2.out"
         });
-        
+        tl.pause();
+        menuIcon.addEventListener("click", () => {
+            tl.play();
+        });
+        navClose.addEventListener("click", () => {
+            tl.reverse();
+        });
     </script>
 </body>
 
