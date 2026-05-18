@@ -39,16 +39,31 @@
     var text = document.querySelector('h1');
     var chars = text.textContent.split('');
     var clutter = ''
-    chars.forEach(function (char) {
-        clutter += `<span>${char}</span>`;
+    chars.forEach(function (char, index) {
+        if( index <chars.length/2) {
+            clutter += `<span class="first">${char}</span>`;
+        } else {
+            clutter += `<span class="second">${char}</span>`;
+        }
+        
     });
     text.innerHTML = clutter
-        gsap.from('h1 span',  {
+
+        gsap.from('.first',  {
         opacity: 0,
         y: 50,
         stagger: 0.1,
         duration: 1,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        delay: 0.5
+    })
+        gsap.from('.second',  {
+        opacity: 0,
+        y: 80,
+        stagger: -0.1,
+        duration: 1,
+        ease: 'power2.out',
+        delay: 0.5
     })
 
 </script>
